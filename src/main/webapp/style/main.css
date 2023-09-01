@@ -1,0 +1,14 @@
+@charset "UTF-8";
+.carousel-inner{
+        width: inherit;
+        height: inherit;
+    }
+    #carouselExampleIndicators{
+        width: 800px !important;
+        height: 200px !important;
+    }
+    
+    img{
+        width: inherit;
+        height:inherit;
+    }
