@@ -11,7 +11,6 @@
 </head>
 
 <body>
-
 	<div class="container mt-3">
 		<h2>위변조 여권 신고</h2>
 		<br />
@@ -49,7 +48,7 @@
 			<div class="mb-3 mt-3 row">
 				<label for="ppdate" class="col-form-label col-md-2">여권발급일</label>
 				<div class="col-md-10">
-					<input type="date" class="form-control" id="ppdate" required placeholder="신고할 여권 번호 입력" name="ppn">
+					<input type="date" class="form-control" id="ppdate" required  name="ppdate">
 				</div>
 			</div>
 			<br />
@@ -67,7 +66,7 @@
 				<div class="mb-3 mt-3 row">
 					<label for="email" class="col-form-label col-md-2">이메일</label>
 					<div class="col-md-10">
-						<input type="email" class="form-control" id="title" placeholder="이메일 입력" required name="email">
+						<input type="email" class="form-control" id="email" placeholder="이메일 입력" required name="email">
 					</div>
 
 				</div>
@@ -121,13 +120,13 @@
 					</div>
 					<div class="col-md-5">
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="agreeOption" id="agreeYes" value="agree">
+							<input class="form-check-input" type="radio" name="consent_status" id="Yes" value="agree">
 							<label class="form-check-label" for="agreeYes">동의</label>
 						</div>
 					</div>
 					<div class="col-md-5">
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="agreeOption" id="agreeNo"
+							<input class="form-check-input" type="radio" name="consent_status" id="No"
 								value="disagree">
 							<label class="form-check-label" for="agreeNo">비동의</label>
 						</div>
@@ -138,7 +137,6 @@
 				<button type="submit" class="btn btn-custom">신고하기</button>
 				<button type="reset" class="btn btn-custom">취소하기</button>
 			</div>
-
 		</form>
 	</div>
 </body>

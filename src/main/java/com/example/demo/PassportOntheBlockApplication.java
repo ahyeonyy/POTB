@@ -10,6 +10,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class PassportOntheBlockApplication {
 
 	public static void main(String[] args) {
+		
+		  SSLUtils.disableSSLVerification();
+
 		SpringApplication.run(PassportOntheBlockApplication.class, args);
 	}
 	@SpringBootApplication
