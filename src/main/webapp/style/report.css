@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	/* 화면 높이를 최소한으로 설정 */
+	display: flex;
+	/* flexbox를 활용 */
+	justify-content: center;
+	/* 수평 가운데 정렬 */
+	align-items: center;
+	/* 수직 가운데 정렬 */
+}
+
+/*
+.info-div {
+    background-color: #F6F9FF;
+    padding: 15px;
+}
+*/
+.form-control {
+	width: 400px;
+	background-color: #F6F9FF;
+	border: none;
+}
+
+.btn-custom {
+    background-color: #457EEC;
+    border-color: #457EEC;
+    color: #ffffff; 
+}
+
+.btn-custom:hover,
+.btn-custom:focus,
+.btn-custom:active {
+    background-color: #3568d1;  /* 살짝 어두운 색으로 바꿨습니다. */
+    border-color: #3568d1;
+    color: #ffffff; 
+}
+
+
+.info-div {
+	background-color: #F6F9FF;
+	padding: 20px;
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	display: table;
+	
+    margin-bottom: 20px;
+
+}
