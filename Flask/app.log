@@ -1,0 +1,3 @@
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 621-471-722
+INFO:werkzeug: * Detected change in '/Users/ahyeonlee/Downloads/POTB/app.py', reloading

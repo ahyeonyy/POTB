@@ -1,12 +1,14 @@
 package com.example.demo.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,8 +24,8 @@ import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -113,6 +115,43 @@ public class MainController {
         }
     }
 	
+	@PostMapping("/inspect")
+	public String inspectImage(@RequestParam("image1") MultipartFile image1,
+	                           @RequestParam("image2") MultipartFile image2,
+	                           Model model) {
+	    try {
+	        // Flask 애플리케이션의 URL 설정
+	        String flaskUrl = "http://localhost:5001/process-images"; // Flask 애플리케이션의 URL로 변경하세요.
+
+	        // JSON 요청 데이터를 Flask로 전송
+	        HttpHeaders headers = new HttpHeaders();
+	        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+	        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+	        body.add("image1", new FileSystemResource(convert(image1)));
+	        body.add("image2", new FileSystemResource(convert(image2)));
+	        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+
+	        // RestTemplate을 사용하여 Flask 엔드포인트로 POST 요청 전송
+	        ResponseEntity<String> responseEntity = restTemplate.postForEntity(flaskUrl, requestEntity, String.class);
+	        String jsonResponse = responseEntity.getBody();
+
+	        // JSON 데이터를 모델에 추가하여 HTML 템플릿에서 사용
+	        model.addAttribute("flaskData", jsonResponse);
+
+	        return "result"; // result.html 템플릿을 반환
+	    } catch (Exception e) {
+	        // 오류 처리 로직 추가
+	        return "error"; // error.html 템플릿을 반환
+	    }
+	}
+
+	// MultipartFile을 File로 변환하는 함수 (임시 디렉토리에 저장)
+	private File convert(MultipartFile file) throws IOException {
+	    File convFile = new File(file.getOriginalFilename());
+	    file.transferTo(convFile);
+	    return convFile;
+	}
+
 
 	@PostMapping("/report")
 	public ModelAndView report(Report r) {

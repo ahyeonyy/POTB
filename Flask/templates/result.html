@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+</head>
+<body>
+   <table id="table-body" border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Birth Date</th>
+                <th>Passport Number</th>
+                <th>Status</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be inserted here dynamically -->
+        </tbody>
+    </table>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+   $(document).ready(function() {
+    // Access the session data passed from Flask
+    var resultData = {{ result_data|tojson|safe }};  
+     var tableBody = $("#table-body");
+    var r = resultData.results
+    var name = r[0];
+    var birth = r[1];
+    var ppn = r[2];
+    var status = r[3];
+    var country = r[4];
+    var newRow = $("<tr>");
+    
+     $.each(r, function(index, value) {
+            var newData = $("<td>").text(value);
+
+            // Append the data cell to the row
+            newRow.append(newData);
+
+            // Append the row to the table body
+            tableBody.append(newRow);
+        });
+    
+});
+</script>
+
+</body>
+</html>
